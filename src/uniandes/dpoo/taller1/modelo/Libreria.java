@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import uniandes.dpoo.taller1.exceptions.BorrarException;
+
 /**
  * Esta clase agrupa toda la información de una librería: las categorías que se
  * usan para clasificar los libros, y del catálogo de libros.
@@ -423,6 +425,51 @@ public class Libreria
 		}
 
 		return hayAutorEnVariasCategorias;
+	}
+	
+	
+	//PARTE 3
+	public int borrarLibrosAutores(String autores) throws BorrarException
+	{
+		String[] autoresArray = autores.split(",");
+		HashMap<String, ArrayList<Libro>> borrados = new HashMap<String, ArrayList<Libro>>();
+		int numBorrados = 0;
+		boolean existenTodos = true;
+		
+		for (String nombreAutor : autoresArray)
+		{
+			ArrayList<Libro> librosAutor = buscarLibrosAutor(nombreAutor);
+			int numLibrosAutor = librosAutor.size();
+			
+			if (numLibrosAutor > 0)
+			{
+				borrados.put(nombreAutor, librosAutor);
+				borrarLibros(librosAutor);
+				numBorrados += numLibrosAutor;
+			}
+			
+			else
+			{
+				existenTodos = false;
+			}
+		}
+		
+		if (existenTodos)
+		{
+			return numBorrados;
+		}
+		
+		else
+		{
+			throw new BorrarException(borrados);
+		}
+	}
+	
+	
+	
+	private void borrarLibros(ArrayList<Libro> libros)
+	{
+		
 	}
 
 }
