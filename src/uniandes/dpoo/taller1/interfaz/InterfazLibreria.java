@@ -20,6 +20,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import uniandes.dpoo.taller1.exceptions.BorrarException;
 import uniandes.dpoo.taller1.modelo.Categoria;
 import uniandes.dpoo.taller1.modelo.Libreria;
 import uniandes.dpoo.taller1.modelo.Libro;
@@ -346,6 +347,40 @@ public class InterfazLibreria extends JFrame
 		}
 		JOptionPane.showMessageDialog(this, mensaje, "Consulta", JOptionPane.INFORMATION_MESSAGE);
 	}
+	
+	
+	
+	// =====================================
+	// DESARROLLO DEL TALLER
+	// =====================================
+	 
+	public void borrarLibros()   //PARTE 3
+	{
+		try
+		{
+			String mensajeInput = "Escriba los nombres de los autores (separados por comas): ";
+			String autores = JOptionPane.showInputDialog(this, mensajeInput, "Autor 1,Autor 2,Autor 3");
+			
+			if (autores.length()>0)
+			{
+				int numBorrados = libreria.borrarLibrosAutores(autores);
+				panelCategorias.actualizarCategorias(libreria.darCategorias());
+				
+				String mensajeOutput = "Fueron eliminados " + numBorrados + " libros";
+				JOptionPane.showMessageDialog(this, mensajeOutput, "Libros borrados", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		
+		catch (BorrarException e)
+		{
+			String mensaje = "No se pudieron eliminar los libros, dado que al menos un autor no existe";
+			mensaje += "\nAutores existentes: " + e.darExistentes();
+			mensaje += "\nAutores inexistentes: " + e.darInexistentes();
+			JOptionPane.showMessageDialog(this, mensaje, "Error al borrar libros", JOptionPane.INFORMATION_MESSAGE);			
+		}
+		
+	}
+	
 
 	// ************************************************************************
 	// Main

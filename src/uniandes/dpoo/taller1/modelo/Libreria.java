@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import uniandes.dpoo.taller1.exceptions.BorrarException;
 
@@ -428,48 +430,77 @@ public class Libreria
 	}
 	
 	
-	//PARTE 3
+	// =========================================
+	// PARTE 3: BORRAR LIBROS
+	// =========================================
 	public int borrarLibrosAutores(String autores) throws BorrarException
 	{
 		String[] autoresArray = autores.split(",");
-		HashMap<String, ArrayList<Libro>> borrados = new HashMap<String, ArrayList<Libro>>();
+		HashMap<String, ArrayList<Libro>> paraBorrar = new HashMap<String, ArrayList<Libro>>();
+		List<String> noExisten = new LinkedList<String>();
 		int numBorrados = 0;
-		boolean existenTodos = true;
 		
+		//Iterar para cada autor y eliminar sus respectivos libros
 		for (String nombreAutor : autoresArray)
 		{
 			ArrayList<Libro> librosAutor = buscarLibrosAutor(nombreAutor);
 			int numLibrosAutor = librosAutor.size();
 			
-			if (numLibrosAutor > 0)
+			if (numLibrosAutor > 0) //Si el autor existe
 			{
-				borrados.put(nombreAutor, librosAutor);
-				borrarLibros(librosAutor);
 				numBorrados += numLibrosAutor;
+				paraBorrar.put(nombreAutor, librosAutor);
 			}
-			
-			else
+			else //Si el autor no existe
 			{
-				existenTodos = false;
+				noExisten.add(nombreAutor);
 			}
 		}
 		
-		if (existenTodos)
+		//Informar la cantidad de libros borrados
+		if (noExisten.size()==0)
 		{
+			borrarLibros(paraBorrar);
 			return numBorrados;
 		}
-		
 		else
 		{
-			throw new BorrarException(borrados);
+			List<String> existen = new LinkedList<String>(paraBorrar.keySet());
+			throw new BorrarException(existen, noExisten);
 		}
 	}
 	
 	
-	
-	private void borrarLibros(ArrayList<Libro> libros)
+	private void borrarLibros(HashMap<String, ArrayList<Libro>> paraBorrar)
 	{
+		for (String nombreAutor : paraBorrar.keySet())
+		{
+			ArrayList<Libro> librosPorBorrar = paraBorrar.get(nombreAutor);
+			borrarLibrosAutor(nombreAutor, librosPorBorrar);
+		}
+	}
+	
+	
+	private void borrarLibrosAutor(String nombreAutor, ArrayList<Libro> librosPorBorrar)
+	{
+		ArrayList<Categoria> categorias = buscarCategoriasAutor(nombreAutor);
 		
+		for (Libro libro : librosPorBorrar)
+		{
+			Categoria laCategoria = libro.darCategoria();
+			int index1 = catalogo.indexOf(libro);
+			catalogo.remove(index1);
+			
+			for (Categoria categoria : categorias)
+			{
+				if (categoria.darNombre().equals(laCategoria.darNombre()))
+				{
+					ArrayList<Libro> librosCategoria = categoria.darLibros();
+					int index2 = librosCategoria.indexOf(libro);
+					librosCategoria.remove(index2);
+				}
+			}
+		}
 	}
 
 }
