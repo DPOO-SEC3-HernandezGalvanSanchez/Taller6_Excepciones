@@ -72,11 +72,11 @@ public class PanelBotones extends JPanel implements ActionListener
 		agregarBoton(BUSCAR_LIBRO, "Buscar libro con titulo", "./data/iconos/libros.png");
 		agregarBoton(BUSCAR_LIBROS_AUTOR, "Buscar libros de un autor", "./data/iconos/autor2.png");
 		agregarBoton(BUSCAR_CATEGORIA_AUTOR, "Buscar categor√≠as autor", "./data/iconos/contenido.png");
-		agregarBoton(CALIFICACION, "Buscar libro con titulo", "./data/iconos/estrella.png");
-		agregarBoton(CATEGORIA_MAS_LIBROS, "Buscar libro con titulo", "./data/iconos/libreria.png");
-		agregarBoton(CONTAR_SIN_PORTADA, "Buscar libro con titulo", "./data/iconos/libro.png");
-		agregarBoton(CATEGORIA_MEJOR, "Buscar libro con titulo", "./data/iconos/premio.png");
-		agregarBoton(AUTOR_VARIAS_CATEGORIAS, "Buscar libro con titulo", "./data/iconos/autor.png");
+		agregarBoton(CALIFICACION, "Calcular calificacion promedio", "./data/iconos/estrella.png");
+		agregarBoton(CATEGORIA_MAS_LIBROS, "Buscar categoria con m·s libros", "./data/iconos/libreria.png");
+		agregarBoton(CONTAR_SIN_PORTADA, "Contar libros sin portada", "./data/iconos/libro.png");
+		agregarBoton(CATEGORIA_MEJOR, "Buscar la mejor categoria", "./data/iconos/premio.png");
+		agregarBoton(AUTOR_VARIAS_CATEGORIAS, "Revisar si algun autor tiene mas de una categoria", "./data/iconos/autor.png");
 		agregarBoton(CATEGORIAS_INEXISTENTES, "Libros en categorias que no existen", "./data/iconos/punto1.png");
 		agregarBoton(RENOMBRAR_CATEGORIAS, "Renombrar categorias", "./data/iconos/punto2.png");
 		agregarBoton(BORRAR_LIBROS, "Borrar libros", "./data/iconos/punto3.png");

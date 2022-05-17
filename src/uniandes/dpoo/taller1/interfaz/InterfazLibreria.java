@@ -172,6 +172,17 @@ public class InterfazLibreria extends JFrame
 		{
 			libreria = new Libreria(archivo_categorias.getPath(), archivo_libros.getPath());
 			panelCategorias.actualizarCategorias(libreria.darCategorias());
+			if (libreria.hayCategoriasNoExisten())
+			{
+				ArrayList<Categoria> catArr = libreria.darCategoriasNoExisten();
+				String mensaje = "Se añadieron las siguientes categorias que no estaban en el archivo de categorias: ";
+				for (int i=0; i<catArr.size();i++)
+				{
+					Categoria cat = catArr.get(i);
+					mensaje += "\nCategoria "+cat.darNombre()+": se agregaron/agrego " + cat.contarLibrosEnCategoria() + " libros/libro de esta";
+				}
+				JOptionPane.showMessageDialog(this, mensaje, "Categorias añadidas",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 		catch (Exception e)
 		{

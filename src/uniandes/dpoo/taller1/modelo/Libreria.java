@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Arrays;
 
 import uniandes.dpoo.taller1.exceptions.BorrarException;
 
@@ -35,6 +36,10 @@ public class Libreria
 	 */
 	private ArrayList<Libro> catalogo;
 
+	/**
+	 * Un arreglo con las categorias que no existen. Parte del punto 1
+	 */
+	private ArrayList<String> newCategorias = new ArrayList<String>();
 	// ************************************************************************
 	// Constructores
 	// ************************************************************************
@@ -80,6 +85,15 @@ public class Libreria
 		return catalogo;
 	}
 
+	/**
+	 * Retorna una lista con las categorias creadas en la carga del catalogo
+	 * 
+	 * @return newCategorias
+	 */
+	public ArrayList<String> darNewCategorias()
+	{
+		return newCategorias;
+	}
 	// ************************************************************************
 	// Otros mÃ©todos
 	// ************************************************************************
@@ -148,6 +162,7 @@ public class Libreria
 		linea = br.readLine();
 		while (linea != null)
 		{
+
 			String[] partes = linea.trim().split(",");
 			String elTitulo = partes[0];
 			String elAutor = partes[1];
@@ -157,7 +172,17 @@ public class Libreria
 			String archivoPortada = partes[4];
 			int ancho = Integer.parseInt(partes[5]);
 			int alto = Integer.parseInt(partes[6]);
-
+			
+			
+			// Se agrega la categoria al arreglo de categorias si no existe. Parte 1
+			if (laCategoria==null)
+			{
+				laCategoria = new Categoria(nombreCategoria, false);
+				this.categorias = Arrays.copyOf(this.categorias, this.categorias.length+1);
+				this.categorias[this.categorias.length-1] = laCategoria;
+				this.newCategorias.add(nombreCategoria);
+			}
+			
 			// Crear un nuevo libro
 			Libro nuevo = new Libro(elTitulo, elAutor, laCalificacion, laCategoria);
 			libros.add(nuevo);
@@ -428,6 +453,27 @@ public class Libreria
 
 		return hayAutorEnVariasCategorias;
 	}
+	
+	// =========================================
+	// PARTE 1: Libros en categorías que no existen
+	// =========================================	
+	
+	public ArrayList<Categoria> darCategoriasNoExisten()
+	{
+		ArrayList<Categoria> resultado = new ArrayList<Categoria>();
+		for (int i=0; i < newCategorias.size();i++)
+		{
+			resultado.add(buscarCategoria(newCategorias.get(i)));
+		}
+		return resultado;
+	}
+	
+	public boolean hayCategoriasNoExisten()
+	{
+		if (newCategorias.size() == 0) return false;
+		else return true;
+	}
+	
 	
 	
 	// =========================================
