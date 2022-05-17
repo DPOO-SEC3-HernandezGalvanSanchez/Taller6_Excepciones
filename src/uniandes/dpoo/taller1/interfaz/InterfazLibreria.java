@@ -361,7 +361,7 @@ public class InterfazLibreria extends JFrame
 			String mensajeInput = "Escriba los nombres de los autores (separados por comas): ";
 			String autores = JOptionPane.showInputDialog(this, mensajeInput, "Autor 1,Autor 2,Autor 3");
 			
-			if (autores.length()>0)
+			if (autores!=null && autores.length()>0)
 			{
 				int numBorrados = libreria.borrarLibrosAutores(autores);
 				panelCategorias.actualizarCategorias(libreria.darCategorias());
