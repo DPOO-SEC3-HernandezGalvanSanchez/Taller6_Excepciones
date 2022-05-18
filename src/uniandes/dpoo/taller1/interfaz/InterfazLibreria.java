@@ -381,6 +381,12 @@ public class InterfazLibreria extends JFrame
 		
 	}
 	
+	public void renombrarCategoria()
+	{
+		
+	
+	}
+	
 
 	// ************************************************************************
 	// Main
