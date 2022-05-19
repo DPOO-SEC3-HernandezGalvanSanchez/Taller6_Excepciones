@@ -165,4 +165,5 @@ public class Libro
 		return this.titulo.equals(otroLibro.titulo);
 	}
 	
+	
 }

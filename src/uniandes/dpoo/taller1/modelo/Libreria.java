@@ -519,6 +519,20 @@ public class Libreria
 		if (categoriaNueva != null) {
 			throw new Exception("Ya existe un catalogo con el mismo nombre.");
 		}
-	
+		actualizarLibros(categoriaAntigua, nombreNuevo);
 	}
+	
+	//pendiente
+	private void actualizarLibros(Categoria categoriaAntigua, String nombreNuevo)
+	{
+		categoriaAntigua.cambiarNombre(nombreNuevo);		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	}

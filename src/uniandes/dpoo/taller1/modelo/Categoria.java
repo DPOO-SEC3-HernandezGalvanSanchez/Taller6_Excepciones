@@ -181,5 +181,9 @@ public class Categoria
 	{
 		return nombre;
 	}
-
+	
+	public void cambiarNombre(String nombreNuevo) 
+	{
+		this.nombre = nombreNuevo;
+	}
 }

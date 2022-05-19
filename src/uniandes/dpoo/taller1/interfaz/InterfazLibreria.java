@@ -389,12 +389,13 @@ public class InterfazLibreria extends JFrame
 			String catalogo = JOptionPane.showInputDialog(this, mensajeInput1, "NombreCatalogo");
 			
 			String mensajeInput2 = "Escriba el nuevo nombre para el catalogo: ";
-			String nuevoCatalogo = JOptionPane.showInputDialog(this, mensajeInput2, "NombreCatalogo");
+			String nuevoCatalogo = JOptionPane.showInputDialog(this, mensajeInput2, "NuevoNombre");
 			
 			if (catalogo!=null && catalogo.length()>0 && nuevoCatalogo!=null && nuevoCatalogo.length()>0  )
 			{
 				libreria.cambiarNombreCategoria(catalogo,nuevoCatalogo);
 				panelCategorias.actualizarCategorias(libreria.darCategorias());
+				panelLibros.actualizarLibros(libreria.darLibros());
 			}
 			else 
 			{
