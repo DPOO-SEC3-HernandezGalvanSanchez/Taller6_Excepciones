@@ -503,4 +503,22 @@ public class Libreria
 		}
 	}
 
-}
+
+
+	//=========================================
+	// PARTE 2: RENOMBRAR CATEGORIA
+	// =========================================
+	public void cambiarNombreCategoria(String nombreAntiguo, String nombreNuevo) throws Exception
+	{
+		Categoria categoriaAntigua = buscarCategoria(nombreAntiguo);
+		if (categoriaAntigua == null) {
+			throw new Exception("No se encontró ningun catalogo con dicho nombre.");
+	
+		}
+		Categoria categoriaNueva = buscarCategoria(nombreNuevo);
+		if (categoriaNueva != null) {
+			throw new Exception("Ya existe un catalogo con el mismo nombre.");
+		}
+	
+	}
+	}
