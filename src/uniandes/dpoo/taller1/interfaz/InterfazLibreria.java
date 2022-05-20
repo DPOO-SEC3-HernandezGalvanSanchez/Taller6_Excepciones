@@ -364,33 +364,6 @@ public class InterfazLibreria extends JFrame
 	// =====================================
 	// DESARROLLO DEL TALLER
 	// =====================================
-	public void borrarLibros()
-	{
-		try
-		{
-			String mensajeInput = "Escriba los nombres de los autores (separados por comas): ";
-			String autores = JOptionPane.showInputDialog(this, mensajeInput, "Autor 1,Autor 2,Autor 3");
-			
-			if (autores!=null && autores.length()>0)
-			{
-				int numBorrados = libreria.borrarLibrosAutores(autores);
-				panelCategorias.actualizarCategorias(libreria.darCategorias());
-				
-				String mensajeOutput = "Fueron eliminados " + numBorrados + " libros";
-				JOptionPane.showMessageDialog(this, mensajeOutput, "Libros borrados", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		
-		catch (BorrarException e)
-		{
-			String mensaje = "No se pudieron eliminar los libros, dado que al menos un autor no existe";
-			mensaje += "\nAutores existentes: " + e.darExistentes();
-			mensaje += "\nAutores inexistentes: " + e.darInexistentes();
-			JOptionPane.showMessageDialog(this, mensaje, "Error al borrar libros", JOptionPane.INFORMATION_MESSAGE);			
-		}
-		
-	}
-	
 	public void renombrarCategoria() //PARTE 2
 	{
 		try
@@ -418,8 +391,39 @@ public class InterfazLibreria extends JFrame
 			String mensajeError2 = e.getMessage();
 			JOptionPane.showMessageDialog(this, mensajeError2, "Error al renombrar la categoria", JOptionPane.INFORMATION_MESSAGE);			
 		}
-	
 	}
+	
+	
+	public void borrarLibros()
+	{
+		try
+		{
+			String mensajeInput = "Escriba los nombres de los autores (separados por comas): ";
+			String autores = JOptionPane.showInputDialog(this, mensajeInput, "Autor 1,Autor 2,Autor 3");
+			
+			if (autores!=null && autores.length()>0)
+			{
+				int numBorrados = libreria.borrarLibrosAutores(autores);
+				panelCategorias.actualizarCategorias(libreria.darCategorias());
+				
+				String mensajeOutput = "Fueron eliminados " + numBorrados + " libros";
+				JOptionPane.showMessageDialog(this, mensajeOutput, "Libros borrados", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else 
+			{
+				String mensajeError1 = "faltaron campos por diligenciar";
+				JOptionPane.showMessageDialog(this, mensajeError1, "Error al renombrar la categoria", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		catch (BorrarException e)
+		{
+			String mensaje = "No se pudieron eliminar los libros, dado que al menos un autor no existe";
+			mensaje += "\nAutores existentes: " + e.darExistentes();
+			mensaje += "\nAutores inexistentes: " + e.darInexistentes();
+			JOptionPane.showMessageDialog(this, mensaje, "Error al borrar libros", JOptionPane.INFORMATION_MESSAGE);			
+		}
+	}
+
 	
 
 	// ************************************************************************

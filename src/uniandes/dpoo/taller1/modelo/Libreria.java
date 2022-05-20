@@ -454,10 +454,11 @@ public class Libreria
 		return hayAutorEnVariasCategorias;
 	}
 	
+	
+	
 	// =========================================
 	// PARTE 1: Libros en categor�as que no existen
 	// =========================================	
-	
 	public ArrayList<Categoria> darCategoriasNoExisten()
 	{
 		ArrayList<Categoria> resultado = new ArrayList<Categoria>();
@@ -474,6 +475,30 @@ public class Libreria
 		else return true;
 	}
 	
+	
+	
+	//=========================================
+	// PARTE 2: RENOMBRAR CATEGORIA
+	// =========================================
+	public void cambiarNombreCategoria(String nombreAntiguo, String nombreNuevo) throws Exception
+	{
+		Categoria categoriaAntigua = buscarCategoria(nombreAntiguo);
+		if (categoriaAntigua == null) {
+			throw new Exception("No se encontró ningun catalogo con dicho nombre.");
+	
+		}
+		Categoria categoriaNueva = buscarCategoria(nombreNuevo);
+		if (categoriaNueva != null) {
+			throw new Exception("Ya existe un catalogo con el mismo nombre.");
+		}
+		actualizarLibros(categoriaAntigua, nombreNuevo);
+	}
+	
+	private void actualizarLibros(Categoria categoriaAntigua, String nombreNuevo)
+	{
+		categoriaAntigua.cambiarNombre(nombreNuevo);		
+	}
+
 	
 	
 	// =========================================
@@ -516,7 +541,6 @@ public class Libreria
 		}
 	}
 	
-	
 	private void borrarLibros(HashMap<String, ArrayList<Libro>> paraBorrar)
 	{
 		for (String nombreAutor : paraBorrar.keySet())
@@ -525,7 +549,6 @@ public class Libreria
 			borrarLibrosAutor(nombreAutor, librosPorBorrar);
 		}
 	}
-	
 	
 	private void borrarLibrosAutor(String nombreAutor, ArrayList<Libro> librosPorBorrar)
 	{
@@ -549,36 +572,4 @@ public class Libreria
 		}
 	}
 
-
-
-	//=========================================
-	// PARTE 2: RENOMBRAR CATEGORIA
-	// =========================================
-	public void cambiarNombreCategoria(String nombreAntiguo, String nombreNuevo) throws Exception
-	{
-		Categoria categoriaAntigua = buscarCategoria(nombreAntiguo);
-		if (categoriaAntigua == null) {
-			throw new Exception("No se encontró ningun catalogo con dicho nombre.");
-	
-		}
-		Categoria categoriaNueva = buscarCategoria(nombreNuevo);
-		if (categoriaNueva != null) {
-			throw new Exception("Ya existe un catalogo con el mismo nombre.");
-		}
-		actualizarLibros(categoriaAntigua, nombreNuevo);
-	}
-	
-	//pendiente
-	private void actualizarLibros(Categoria categoriaAntigua, String nombreNuevo)
-	{
-		categoriaAntigua.cambiarNombre(nombreNuevo);		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	}
+}
