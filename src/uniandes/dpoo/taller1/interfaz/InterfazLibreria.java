@@ -179,7 +179,7 @@ public class InterfazLibreria extends JFrame
 				for (int i=0; i<catArr.size();i++)
 				{
 					Categoria cat = catArr.get(i);
-					mensaje += "\nCategoria "+cat.darNombre()+": se agregaron/agrego " + cat.contarLibrosEnCategoria() + " libros/libro de esta";
+					mensaje += "\nCategoria "+cat.darNombre()+": se agregaron " + cat.contarLibrosEnCategoria() + " libros";
 				}
 				JOptionPane.showMessageDialog(this, mensaje, "Categorias añadidas",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -364,8 +364,7 @@ public class InterfazLibreria extends JFrame
 	// =====================================
 	// DESARROLLO DEL TALLER
 	// =====================================
-	 
-	public void borrarLibros()   //PARTE 3
+	public void borrarLibros()
 	{
 		try
 		{
